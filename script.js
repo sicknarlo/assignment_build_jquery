@@ -1,28 +1,34 @@
+
+
 var jQuery = function(str){
 
   var results = {}
 
-  switch (str[0]){
+  if (typeof str === "object"){
+    results.value = str
+  } else {
 
-    case ".":
-      //finds class
-      results.value = document.getElementsByClassName(str.slice(1));
+    switch (str[0]){
+
+      case ".":
+        //finds class
+        results.value = document.getElementsByClassName(str.slice(1));
 
 
-    case "#":
-      //finds id
-      results.value = document.getElementById(str.slice(1));
+      case "#":
+        //finds id
+        results.value = document.getElementById(str.slice(1));
 
-    case "<":
-      //if DOM Node is passed
-      results.value = str;
+      case "<":
+        //if DOM Node is passed
+        results.value = str;
 
-    default:
-      //find element
-      results.value = document.getElementsByTagName(str);
+      default:
+        //find element
+        results.value = document.getElementsByTagName(str);
 
+    }
   }
-
   results.idx = function(index) {
     return this.value[index];
   }
@@ -40,9 +46,9 @@ var jQuery = function(str){
     return false;
   }
 
-  // results.each = function(){
+  // results.each = function(block_function){
   //   for (var i = 0; i < this.length(); i++) {
-  //     return el=this.value[i];
+  //     return block_function(this.value[i]);
   //   }
   // }
 
@@ -87,6 +93,34 @@ var jQuery = function(str){
       }
     }
   }
+
+  results.css = function(prop, value) {
+    if (value == undefined) { return this.value[0].style[prop]
+    }
+    else {return this.value[0].style[prop] = value
+    }
+  }
+
+  results.height = function(value){
+    if (value == undefined) { 
+      return this.value[0].clientHeight;
+    }
+    else {
+      return this.value[0].style.height = value;
+    }
+  }
+
+  results.width = function(value){
+    if (value == undefined) { 
+      return this.value[0].clientWidth;
+    }
+    else {
+      return this.value[0].style.width = value;
+    }
+  }
+
+  
+
 
   return results;
 }
