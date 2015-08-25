@@ -13,6 +13,9 @@ var jQuery = function(str){
       //finds id
       results.value = document.getElementById(str.slice(1));
 
+    case "<":
+      //if DOM Node is passed
+      results.value = str;
 
     default:
       //find element
@@ -21,7 +24,12 @@ var jQuery = function(str){
   }
 
   results.idx = function(index) {
-    return value[index]
+    return this.value[index];
   }
 
+  results.length = function(){
+    return this.value.length;
+  }
+
+  return results;
 }
