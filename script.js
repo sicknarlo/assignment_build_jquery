@@ -33,14 +33,33 @@ var jQuery = function(str){
 
   results.hasClass = function(name) {
     for (var i = 0; i < this.length(); i++) {
-      var classes = this.value[i].className.split(" ");
-      for (var j = 0; j < classes.length; j++) {
-        if (classes[j] === name) {
-          return true;
-        }
-      }
+      if (this.value[i].className.includes(name)){
+        return true;
+      } 
     }
     return false;
+  }
+
+  // results.each = function(){
+  //   for (var i = 0; i < this.length(); i++) {
+  //     return el=this.value[i];
+  //   }
+  // }
+
+  results.addClass = function(name) {
+    for (var i = 0; i < this.length(); i++) {
+      this.value[i].className+=" "+name
+    }
+  }
+
+  results.removeClass = function(name) {
+    for (var i = 0; i < this.length(); i++) {
+      var classes = this.value[i].className.split(" ")
+      if (classes.indexOf(name) > 0) {
+        classes.splice(classes.indexOf(name),1)
+        this.value[i].className = classes.join(" ")
+      } 
+    }
   }
 
   return results;
