@@ -8,7 +8,6 @@ var jQuery = function(str){
       //finds class
       results.value = document.getElementsByClassName(str.slice(1));
 
-
     case "#":
       //finds id
       results.value = document.getElementById(str.slice(1));
