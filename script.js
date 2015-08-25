@@ -8,21 +8,25 @@ var jQuery = function(str){
     results.value = str
   } else {
 
-    switch (str[0]){
+    results.value = document.querySelectorAll(str);
 
-    case "#":
-      //finds id
-      results.value = document.getElementById(str.slice(1));
+    // switch (str[0]){
 
-      case ".":
-        //finds class
-        results.value = document.getElementsByClassName(str.slice(1));
+    //   case ".":
+    //     //finds class
+    //     results.value = document.getElementsByClassName(str.slice(1));
+    //     break;
 
-      default:
-        //find element
-        results.value = document.getElementsByTagName(str);
+    //   case "#":
+    //     //finds id
+    //     results.value = document.getElementById(str.slice(1));
+    //     break;
 
-    }
+    //   default:
+    //     //find element
+    //     results.value = document.getElementsByTagName(str);
+    //     break;
+    // }
   }
   results.idx = function(index) {
     return this.value[index];
@@ -114,8 +118,25 @@ var jQuery = function(str){
     }
   }
 
+  results.attr = function(attributeName, value) {
+    if (value === undefined) {
+      return this.value[0].attributes[attributeName]
+    }
+    else {
+      return this.value[0].attributes[attributeName] = value;
+    }
+  }
 
-
+  results.html = function(htmlString) {
+    if (htmlString === undefined) {
+      return this.value[0].innerHTML
+    }
+    else {
+      for (var i = 0; i < this.length(); i++) {
+        this.value[i].innerHTML = htmlString
+      }
+    }
+  }
 
   return results;
 }
