@@ -35,7 +35,7 @@ var jQuery = function(str){
     for (var i = 0; i < this.length(); i++) {
       if (this.value[i].className.includes(name)){
         return true;
-      } 
+      }
     }
     return false;
   }
@@ -58,7 +58,33 @@ var jQuery = function(str){
       if (classes.indexOf(name) > 0) {
         classes.splice(classes.indexOf(name),1)
         this.value[i].className = classes.join(" ")
-      } 
+      }
+    }
+  }
+
+  results.toggleClass = function(name) {
+    for (var i = 0; i < this.length(); i++) {
+      if (this.value[i].className.includes(name)) {
+        var classes = this.value[i].className.split(" ")
+        if (classes.indexOf(name) > 0) {
+          classes.splice(classes.indexOf(name),1)
+          this.value[i].className = classes.join(" ")
+        }
+      }
+      else {
+        this.value[i].className+=" "+name
+      }
+    }
+  }
+
+  results.val = function(name) {
+    if (name === undefined) {
+      return this.value[0].attributes.value.value
+    }
+    else {
+      for (var i = 0; i < this.length(); i++) {
+        this.value[i].attributes.value.value = name
+      }
     }
   }
 
